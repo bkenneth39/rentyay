@@ -22,4 +22,10 @@ class OrderDetailModel extends Model
 
         return $this->findAll();
     }
+
+    public function getProducts($idorder){
+        $this->where('id_order',$idorder);
+        $this->select('id_products');
+        return $this->findAll();
+    }
 }

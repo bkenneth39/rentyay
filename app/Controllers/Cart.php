@@ -87,7 +87,14 @@ class Cart extends BaseController
         $cart = \Config\Services::cart();
 
         $cart->remove($_POST['rowid']);
-        return redirect()->to(base_url() . '/cart/check');
+
+        if((count($cart->contents()) === 0)){
+            return redirect()->to(base_url().'/rentlist');
+        }
+        else{
+            return redirect()->to(base_url() . '/cart/check');
+        }
+        
     }
 
     public function checkout(){

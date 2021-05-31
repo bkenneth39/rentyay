@@ -87,10 +87,10 @@ foreach ($data as $value) {
                     <input type="hidden" name="name" value="<?= $list['nama'] ?>">
                     <input type="hidden" name="harga" value="<?= $list['harga'] ?>">
 
-                    <div style="display: flex; width: 100px; align-items:center; justify-content:space-between;" class="form-group">
+                    <!-- <div style="display: flex; width: 100px; align-items:center; justify-content:space-between;" class="form-group">
                         <label for="day">Day:</label>
                         <input style="width: 50px;" type="number" value="1" min="1" max="14" name="day" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </div>
+                    </div> -->
                     <?php if (in_array($list['nama'], $dataArr)) : ?>
                         <button type="submit" disabled name="submit" class="btn btn-success button-rent">Added</button>
                     <?php else : ?>

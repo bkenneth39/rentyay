@@ -20,6 +20,15 @@ class RentListModel extends Model{
         return $this->findAll();
     }
 
+    public function getStock($idproducts){
+       
+        $this->where('id_products',$idproducts);
+        $this->select('stock');
+        return $this->findAll();
+        
+        
+    }
+
     public function getAllAccessories(){
         $this->where('id_category >=', 6);
         $this->where('id_category <=', 9);

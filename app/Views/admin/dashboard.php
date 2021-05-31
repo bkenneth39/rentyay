@@ -8,7 +8,7 @@
     <title><?= $title; ?></title>
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link href="<?=base_url()?>/css/style.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>/css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 </head>
@@ -27,7 +27,7 @@
                 <div class="navbar-header">
                     <div class="navbar-brand ms-4">
                         <span class="logo-text">
-                            <img src="/img/logoputih.png" alt="homepage" class="dark-logo img-fluid" max-width: 100%; />
+                            <a href="<?= base_url(); ?>"><img src="/img/logoputih.png" alt="homepage" class="dark-logo img-fluid" max-width: 100%; /></a>
                         </span>
                     </div>
                     <a class="nav-toggler waves-effect waves-light text-white d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
@@ -41,7 +41,7 @@
 
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <b class="nav-link text-light waves-effect waves-dark" style="font-size: 20px;"><i class="fas fa-user-alt"></i> Bryan</b>
+                            <b class="nav-link text-light waves-effect waves-dark" style="font-size: 20px;"><i class="fas fa-user-alt"></i>    <?= $user['fullname']; ?></b>
                         </li>
                     </ul>
                 </div>
@@ -55,22 +55,22 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?=base_url()?>/Admin" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?= base_url() ?>/Admin" aria-expanded="false">
                                 <i class="fas fa-table"></i><span class="hide-menu">Product</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?=base_url()?>/Admin/order" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?= base_url() ?>/Admin/order" aria-expanded="false">
                                 <i class="fas fa-tasks"></i><span class="hide-menu">Order</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?=base_url()?>/Admin/report" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?= base_url() ?>/Admin/report" aria-expanded="false">
                                 <i class="fas fa-file"></i><span class="hide-menu">Report</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?=base_url()?>/logout" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?= base_url() ?>/logout" aria-expanded="false">
                                 <i class="fas fa-sign-out-alt"></i><span class="hide-menu">Logout</span>
                             </a>
                         </li>
@@ -102,7 +102,7 @@
             <div class="container-fluid backG">
                 <div class="row">
                     <div class="col-12">
-                        <a href="<?=base_url()?>/Admin/add" class="btn btn-primary mb-3">Add Product</a>
+                        <a href="<?= base_url() ?>/Admin/add" class="btn btn-primary mb-3">Add Product</a>
                         <?php if (session()->getFlashdata('pesan')) : ?>
                             <div class="alert alert-success" role="alert">
                                 <?= session()->getFlashdata('pesan'); ?>
@@ -153,7 +153,7 @@
                                         <td><img src="/img/<?= $i['gambar']; ?>" alt="" width="100"></td>
                                         <td><?= $i['stock']; ?></td>
                                         <td>
-                                            <a href="<?=base_url()?>/Admin/detail/<?= $i['id_products']; ?>" class="btn btn-success"><span><i class="fas fa-search"></i></span></a>
+                                            <a href="<?= base_url() ?>/Admin/detail/<?= $i['id_products']; ?>" class="btn btn-success"><span><i class="fas fa-search"></i></span></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

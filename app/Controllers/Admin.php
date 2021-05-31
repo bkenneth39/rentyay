@@ -13,15 +13,15 @@ class Admin extends BaseController
 {
 	protected $AdminModel;
 	protected $rentListModel;
-    protected $orderModel;
-    protected $orderDetailModel;
+	protected $orderModel;
+	protected $orderDetailModel;
 	public function __construct()
 	{
 		$this->AdminModel = new AdminModel();
 		$this->rentListModel = new RentListModel();
-        $this->orderModel = new OrderModel();
-        $this->orderDetailModel = new OrderDetailModel();
-        $this->HomeModel = new HomeModel();
+		$this->orderModel = new OrderModel();
+		$this->orderDetailModel = new OrderDetailModel();
+		$this->HomeModel = new HomeModel();
 	}
 
 	// Ke halaman login
@@ -36,10 +36,20 @@ class Admin extends BaseController
 	// Dashboard Admin
 	public function index()
 	{
-		$data = [
-			'title' => 'Dashboard',
-			'item' => $this->AdminModel->getProduct()
-		];
+		if (logged_in()) {
+			$iduser = user_id();
+			$data = [
+				'title' => 'Dashboard',
+				'item' => $this->AdminModel->getProduct(),
+				'user' => $this->HomeModel->getName($iduser)
+			];
+		} else {
+			$data = [
+				'title' => 'Dashboard',
+				'item' => $this->AdminModel->getProduct()
+			];
+		}
+
 
 		$users = new \Myth\Auth\Models\UserModel();
 		$data['users'] = $users->findAll();
@@ -51,10 +61,20 @@ class Admin extends BaseController
 	// Tambah data
 	public function add()
 	{
-		$data = [
-			'title' => 'Add Product',
-			'validation' => \Config\Services::validation()
-		];
+		if (logged_in()) {
+			$iduser = user_id();
+			$data = [
+				'title' => 'Add Product',
+				'validation' => \Config\Services::validation(),
+				'user' => $this->HomeModel->getName($iduser)
+			];
+		} else {
+			$data = [
+				'title' => 'Add Product',
+				'validation' => \Config\Services::validation()
+			];
+		}
+
 		return view('admin/add', $data);
 	}
 
@@ -123,10 +143,20 @@ class Admin extends BaseController
 	// Detail product
 	public function detail($id)
 	{
-		$data = [
-			'title' => 'Detail Product',
-			'product' => $this->AdminModel->getProduct($id)
-		];
+		if (logged_in()) {
+			$iduser = user_id();
+			$data = [
+				'title' => 'Detail Product',
+				'product' => $this->AdminModel->getProduct($id),
+				'user' => $this->HomeModel->getName($iduser)
+			];
+		} else {
+			$data = [
+				'title' => 'Detail Product',
+				'product' => $this->AdminModel->getProduct($id)
+			];
+		}
+
 
 		if (empty($data['product'])) {
 			throw new \CodeIgniter\Exceptions\PageNotFoundException('Komik dengan id ' . $id . ' tidak ditemukan');
@@ -138,11 +168,22 @@ class Admin extends BaseController
 	// Edit product
 	public function edit($id)
 	{
-		$data = [
-			'title' => 'Edit Product',
-			'validation' => \Config\Services::validation(),
-			'product' => $this->AdminModel->getProduct($id)
-		];
+		if (logged_in()) {
+			$iduser = user_id();
+			$data = [
+				'title' => 'Edit Product',
+				'validation' => \Config\Services::validation(),
+				'product' => $this->AdminModel->getProduct($id),
+				'user' => $this->HomeModel->getName($iduser)
+			];
+		} else {
+			$data = [
+				'title' => 'Edit Product',
+				'validation' => \Config\Services::validation(),
+				'product' => $this->AdminModel->getProduct($id)
+			];
+		}
+
 		return view('admin/edit', $data);
 	}
 	public function update($id)
@@ -244,7 +285,8 @@ class Admin extends BaseController
 			$data = [
 				'cart' => \Config\Services::cart(),
 				'title' => "Daftar Order",
-				'content' => $this->orderDetailModel->getData()
+				'content' => $this->orderDetailModel->getData(),
+				'user' => $this->HomeModel->getName($id)
 			];
 		} else {
 			$data = [
@@ -255,17 +297,37 @@ class Admin extends BaseController
 		return view('admin/order', $data);
 	}
 
-	public function updatestatus(){
+	public function updatestatus()
+	{
 
-	
+
 		$data = $this->orderModel->getByToken($_POST['token']);
 		$pesan = $_POST['submit'];
-		foreach($data as $value){
+		if ($pesan == 'Order Selesai') {
+			foreach ($data as $value) {
+				$arrayidproducts = $this->orderDetailModel->getProducts(intval($value['id_order']));
+				$idproducts = intval($arrayidproducts[0]['id_products']);
+
+				$arraystocks = $this->rentListModel->getStock($idproducts);
+
+				$newstock = intval($arraystocks[0]['stock']) + 1;
+
+				$this->rentListModel->set('stock', $newstock);
+				$this->rentListModel->where('id_products', $idproducts);
+				$this->rentListModel->update();
+				// d($newstock);	
+
+				// $this->orderModel->set('status',$pesan);
+				// $this->orderModel->where('id_order',intval($value['id_order']));
+				// $this->orderModel->update();
+
+			}
+		}
+		foreach ($data as $value) {
 			// d($value);
-			$this->orderModel->set('status',$pesan);
-			$this->orderModel->where('id_order',intval($value['id_order']));
+			$this->orderModel->set('status', $pesan);
+			$this->orderModel->where('id_order', intval($value['id_order']));
 			$this->orderModel->update();
-			
 		}
 		return redirect()->to('/admin/order');
 	}

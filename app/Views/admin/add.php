@@ -27,7 +27,7 @@
                 <div class="navbar-header">
                     <div class="navbar-brand ms-4">
                         <span class="logo-text">
-                            <img src="/img/logoputih.png" alt="homepage" class="dark-logo img-fluid" max-width: 100%; />
+                            <a href="<?= base_url(); ?>"><img src="/img/logoputih.png" alt="homepage" class="dark-logo img-fluid" max-width: 100%; /></a>
                         </span>
                     </div>
                     <a class="nav-toggler waves-effect waves-light text-white d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
@@ -41,7 +41,7 @@
 
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <b class="nav-link text-light waves-effect waves-dark" style="font-size: 20px;"><i class="fas fa-user-alt"></i> Markarn Doe</b>
+                            <b class="nav-link text-light waves-effect waves-dark" style="font-size: 20px;"><i class="fas fa-user-alt"></i>    <?= $user['fullname']; ?></b>
                         </li>
                     </ul>
                 </div>
