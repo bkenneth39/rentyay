@@ -229,7 +229,8 @@
         .footer {
             display: none;
         }
-        .footer2{
+
+        .footer2 {
             display: block;
         }
     }
@@ -363,7 +364,7 @@
     <div class="footer">
         <div class="row">
             <div class="col">
-                <img src="/img/logoputih.png" alt="">
+                <a href="<?= base_url('aboutus'); ?>"><img src="/img/logoputih.png" alt=""></a>
                 <p>Summarecon Digital Center
                     Jalan Scientia Boulevard
                     Gading Serpong, Tangerang Selatan
@@ -375,9 +376,9 @@
             <div class="col">
                 <h3>Follow Us On :</h3>
                 <div class="icons">
-                    <a target = "blank" href="https://www.instagram.com/playstation/"><img src="https://iyadsughayer.com/wp-content/uploads/2018/11/Instagram-icon-WHITE.png" alt=""></a>
-                    <a target = "blank" href="https://www.facebook.com/playstation/"><img src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/facebook-icon-18-256.png" alt=""></a>
-                    <a target = "blank" href="https://api.whatsapp.com/send?phone=6281230046555&text=Halo%20Admin,%20"><img src="img/whatsapp.png" alt=""></a>
+                    <a target="blank" href="https://www.instagram.com/playstation/"><img src="https://iyadsughayer.com/wp-content/uploads/2018/11/Instagram-icon-WHITE.png" alt=""></a>
+                    <a target="blank" href="https://www.facebook.com/playstation/"><img src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/facebook-icon-18-256.png" alt=""></a>
+                    <a target="blank" href="https://api.whatsapp.com/send?phone=6281230046555&text=Halo%20Admin,%20"><img src="img/whatsapp.png" alt=""></a>
                 </div>
             </div>
         </div>
@@ -391,7 +392,7 @@
     <div class="footer2">
         <div class="row">
             <div class="col">
-                <img src="/img/logoputih.png" alt="">
+                <a href="<?= base_url('aboutus'); ?>"><img src="/img/logoputih.png" alt=""></a>
             </div>
         </div>
         <div class="row">
@@ -403,9 +404,9 @@
             <div class="col">
                 <h3>Follow Us On :</h3>
                 <div class="icons">
-                    <a target = "blank" href="https://www.instagram.com/playstation/"><img src="https://iyadsughayer.com/wp-content/uploads/2018/11/Instagram-icon-WHITE.png" alt=""></a>
-                    <a target = "blank" href="https://www.facebook.com/playstation/"><img src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/facebook-icon-18-256.png" alt=""></a>
-                    <a target = "blank" href="https://api.whatsapp.com/send?phone=6281230046555&text=Halo%20Admin,%20"><img src="img/whatsapp.png" alt=""></a>
+                    <a target="blank" href="https://www.instagram.com/playstation/"><img src="https://iyadsughayer.com/wp-content/uploads/2018/11/Instagram-icon-WHITE.png" alt=""></a>
+                    <a target="blank" href="https://www.facebook.com/playstation/"><img src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/facebook-icon-18-256.png" alt=""></a>
+                    <a target="blank" href="https://api.whatsapp.com/send?phone=6281230046555&text=Halo%20Admin,%20"><img src="img/whatsapp.png" alt=""></a>
                 </div>
             </div>
         </div>

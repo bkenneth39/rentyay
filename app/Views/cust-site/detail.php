@@ -91,14 +91,20 @@ foreach ($data as $value) {
                         <label for="day">Day:</label>
                         <input style="width: 50px;" type="number" value="1" min="1" max="14" name="day" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div> -->
-                    <?php if (in_array($list['nama'], $dataArr)) : ?>
-                        <button type="submit" disabled name="submit" class="btn btn-success button-rent">Added</button>
+                   
+                    <?php if (logged_in() && in_array($list['nama'], $dataArr)) : ?>
+                        <button type="" disabled name="submit" class="btn btn-success button-rent">Added</button>
                     <?php else : ?>
-                        <?php if ($list['stock'] > 0) : ?>
+                        <?php if (logged_in() && $list['stock'] > 0) : ?>
                             <button type="submit" name="submit" class="btn btn-dark button-rent"><img style="width: 20px;" src="/img/carticonpngputih.png" alt=""> Add</button>
                         <?php else : ?>
-                            <button type="submit" disabled name="submit" class="btn btn-danger button-rent">Empty</button>
+                            <?php if(logged_in()) : ?>
+                            <button type="" disabled name="submit" class="btn btn-danger button-rent">Empty</button>
+                            <?php else :  ?>
+                                <button type="" disabled name="submit" class="btn btn-danger button-rent">Log In!</button>
+                                <?php endif; ?>
                         <?php endif; ?>
+                        
                     <?php endif; ?>
 
 

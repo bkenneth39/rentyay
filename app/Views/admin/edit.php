@@ -11,6 +11,7 @@
     <link href="<?= base_url() ?>/css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="icon" href="/img/logorputih.png" type="image/x-icon" />
 </head>
 
 <body>
@@ -65,7 +66,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?= base_url() ?>/Admin/report" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark" style="text-decoration: none;" href="<?= base_url() ?>/Admin/report" target="blank" aria-expanded="false">
                                 <i class="fas fa-file"></i><span class="hide-menu">Report</span>
                             </a>
                         </li>

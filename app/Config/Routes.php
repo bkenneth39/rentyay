@@ -35,6 +35,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 $routes->get('/Admin', 'Admin::index',['filter' => 'role:Admin']);
+$routes->get('/admin', 'Admin::index',['filter' => 'role:Admin']);
 $routes->get('/Admin/index', 'Admin::index',['filter' => 'role:Admin']);
 $routes->get('/Admin/add', 'Admin::add',['filter' => 'role:Admin']);
 $routes->get('/Admin/save', 'Admin::save',['filter' => 'role:Admin']);
@@ -42,6 +43,13 @@ $routes->get('/Admin/detail/(:any)', 'Admin::detail/$1',['filter' => 'role:Admin
 $routes->get('/Admin/edit/(:any)', 'Admin::edit/$1',['filter' => 'role:Admin']);
 $routes->get('/Admin/update/(:any)', 'Admin::update/$1',['filter' => 'role:Admin']);
 $routes->get('/Admin/delete/(:any)', 'Admin::delete/$1',['filter' => 'role:Admin']);
+$routes->get('/admin/index', 'Admin::index',['filter' => 'role:Admin']);
+$routes->get('/admin/add', 'Admin::add',['filter' => 'role:Admin']);
+$routes->get('/admin/save', 'Admin::save',['filter' => 'role:Admin']);
+$routes->get('/admin/detail/(:any)', 'Admin::detail/$1',['filter' => 'role:Admin']);
+$routes->get('/admin/edit/(:any)', 'Admin::edit/$1',['filter' => 'role:Admin']);
+$routes->get('/admin/update/(:any)', 'Admin::update/$1',['filter' => 'role:Admin']);
+$routes->get('/admin/delete/(:any)', 'Admin::delete/$1',['filter' => 'role:Admin']);
 
 $routes->get('/rentlist', 'Rentlist::index');
 $routes->get('/cart', 'Cart::index');

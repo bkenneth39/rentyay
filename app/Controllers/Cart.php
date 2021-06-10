@@ -138,6 +138,7 @@ class Cart extends BaseController
             $this->orderModel->save([
                 'id_user' => $iduser,
                 'transaction_date' => date("Y-m-j"),
+                'total' => intval($value['price']) * intval($value['qty']),
                 'status' => "Sedang Dikirim",
                 'uniqueCode' => $uniqueCode,
                 'token' => $token

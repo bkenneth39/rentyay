@@ -18,6 +18,7 @@ class OrderDetailModel extends Model
         $this->select('orders.status AS status');
         $this->select('orders.token AS token');
         $this->groupby('orders.token');
+        $this->orderby('date','desc');
 
 
         return $this->findAll();

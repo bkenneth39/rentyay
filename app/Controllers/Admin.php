@@ -8,6 +8,7 @@ use App\Models\OrderModel;
 use App\Models\OrderDetailModel;
 use App\Models\HomeModel;
 use App\Models\RentListModel;
+use \Mpdf\Mpdf;
 
 class Admin extends BaseController
 {
@@ -330,5 +331,124 @@ class Admin extends BaseController
 			$this->orderModel->update();
 		}
 		return redirect()->to('/admin/order');
+	}
+
+	public function report()
+	{
+		$id = user_id();
+        $user = $this->HomeModel->getName($id);
+		$transaction_date = date("Y-m-j");
+		$data = $this->orderModel->getAllOrderDetails();
+		
+		$totalPricesfinal = $this->orderModel->getTotalPrice();
+		$totalPricesfinal = $totalPricesfinal[0]['total'];
+		
+		
+		$html = '<html>
+        <head>
+        <style>
+        body {font-family: sans-serif;
+            font-size: 10pt;
+        }
+        p {	margin: 0pt; }
+        table.items {
+            border: 0.1mm solid #000000;
+        }
+        td { vertical-align: top; }
+        .items td {
+            border-left: 0.1mm solid #000000;
+            border-right: 0.1mm solid #000000;
+        }
+        table thead td { background-color: #EEEEEE;
+            text-align: center;
+            border: 0.1mm solid #000000;
+            font-variant: small-caps;
+        }
+        .items td.blanktotal {
+            background-color: #EEEEEE;
+            border: 0.1mm solid #000000;
+            background-color: #FFFFFF;
+            border: 0mm none #000000;
+            border-top: 0.1mm solid #000000;
+            border-right: 0.1mm solid #000000;
+        }
+        .items td.totals {
+            text-align: right;
+            border: 0.1mm solid #000000;
+        }
+        .items td.cost {
+            text-align: "." center;
+        }
+        </style>
+        </head>
+        <body>
+        <!--mpdf
+        <htmlpageheader name="myheader">
+        <table width="100%"><tr>
+        <td width="50%" style="color:#00000; "><span style="font-weight: bold; font-size: 14pt;">Rentyay Corp</span><br />Summarecon Digital Center<br />Tangerang Selatan<br />15810<br /></td>
+        <td width="50%" style="text-align: right;"><br /><span style="font-weight: bold; font-size: 12pt;">Admin Report</span></td>
+        </tr></table>
+        </htmlpageheader>
+        <htmlpagefooter name="myfooter">
+        <div style="border-top: 1px solid #000000; font-size: 9pt; text-align: center; padding-top: 3mm; ">
+        Page {PAGENO} of {nb}
+        </div>
+        </htmlpagefooter>
+        <sethtmlpageheader name="myheader" value="on" show-this-page="1" />
+        <sethtmlpagefooter name="myfooter" value="on" />
+      
+        <div style="text-align: right">Printed  Date: ' . $transaction_date . '</div>
+        <table width="100%" style="font-family: serif;" cellpadding="10"><tr>
+        <td width="45%" ><span style="font-size: 7pt; color: #555555; font-family: sans;">Printed by:</span><br /><br />' . $user['fullname'] . '<br />' . $user['email'] . '<br /><br />' . $user['no_telp'] . '</td>
+        
+        </tr></table>
+        <br />
+        <table class="items" width="100%" style="font-size: 9pt; border-collapse: collapse; " cellpadding="8">
+        <thead>
+        <tr>
+        <td width="20%">Nama User</td>
+        <td width="20%">Nama Produk</td>
+        <td width="15%">Lama peminjaman</td>
+        <td width="15%">Tanggal Transaksi</td>
+        <td width="15%">Tanggal Kembali</td>
+        <td width="15%">Total Harga</td>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- ITEMS HERE -->
+        ';
+
+		foreach($data as $d){
+			$tanggalkembali = date('Y-m-d', strtotime($d['date']. '+'.intval($d['day'])." days"));
+			$html .='
+				<tr>
+				<td>'.$d['namauser'].'</td>
+				<td>'.$d['nama'].'</td>
+				<td>'.$d['day'].' hari</td>
+				<td>'.$d['date'].'</td>
+				<td>'.$tanggalkembali.'</td>
+				<td>Rp '.$d['total'].',00</td>
+				</tr>
+			';
+		}
+		$html .= '
+        </tbody>
+        </table>
+        <br>
+        <br>
+        <div style="text-align: center; font-style: italic;">Total: Rp ' . $totalPricesfinal . ',00</div>
+        </body>
+        </html>
+        ';
+		$mpdf = new \Mpdf\Mpdf([
+            'margin_left' => 20,
+            'margin_right' => 15,
+            'margin_top' => 48,
+            'margin_bottom' => 25,
+            'margin_header' => 10,
+            'margin_footer' => 10
+        ]);
+		$mpdf->WriteHTML($html);
+		return redirect()->to($mpdf->Output($user['fullname'].' admin report.pdf','I')); 
 	}
 }

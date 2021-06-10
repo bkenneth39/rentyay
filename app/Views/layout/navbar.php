@@ -11,7 +11,7 @@
         <div class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link active navlink" href="<?= base_url() ?>/RentList/">Rent!</a></li>
 
-            <li class="nav-item"><a class="nav-link active navlink" href="#">About Us</a></li>
+            <li class="nav-item"><a class="nav-link active navlink" href="<?= base_url('aboutus'); ?>">About Us</a></li>
             <?php if (in_groups('Admin')) : ?>
                 <li class="nav-item"><a class="nav-link active navlink" href="<?= base_url() ?>/Admin">Go to Admin Page</a></li>
             <?php endif; ?>
